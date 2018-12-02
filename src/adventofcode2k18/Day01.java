@@ -1,13 +1,14 @@
 package adventofcode2k18;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Day01 {
-	
-	public static void main(String[] args) throws IOException {
-		ArrayList<String> in = GetInput.get("01.txt");
-		// Answer part 1
+
+    public static void main(String[] args) throws IOException {
+        ArrayList<String> in = GetInput.get("01.txt");
+        // Answer part 1
 		/*
 		int ans = 0;
 		for(String line : in) {
@@ -23,11 +24,11 @@ public class Day01 {
 		}
 		System.out.println("answer: " + ans);
 		*/
-		//answer part 2
-		int freq = 0;
-		List<Integer> frequencies = new ArrayList<>();
-		frequencies.add(freq);
-		while(true) {
+        //answer part 2
+        int freq = 0;
+        List<Integer> frequencies = new ArrayList<>();
+        frequencies.add(freq);
+        while (true) {
             for (String line : in) {
                 String op = line.substring(0, 1);
                 String nr = line.substring(1);
@@ -44,5 +45,5 @@ public class Day01 {
                 frequencies.add(freq);
             }
         }
-	}
+    }
 }
