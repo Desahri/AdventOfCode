@@ -11,8 +11,8 @@ public class Day02 {
         int two = 0;
         int three = 0;
 
-        for(String id : in) {
-            if(hasExactlyTwo(id)) {
+        for (String id : in) {
+            if (hasExactlyTwo(id)) {
                 two++;
             }
             if (hasExactlyThree(id)) {
@@ -21,23 +21,41 @@ public class Day02 {
         }
 
         //calculate checksum
-        int checksum = two*three;
-        System.out.println(checksum);
+        int checksum = two * three;
+        System.out.println("answer: " + checksum);
     }
 
     /**
-     *
      * returns whether the strings has a character that appears exactly twice
      */
     static boolean hasExactlyTwo(String id) {
+        for (char c : id.toCharArray()) {
+            if (getCharCount(id, c) == 2) {
+                return true;
+            }
+        }
         return false;
     }
 
     /**
-     *
      * returns whether the strings has a character that appears exactly three times
      */
     static boolean hasExactlyThree(String id) {
+        for (char c : id.toCharArray()) {
+            if (getCharCount(id, c) == 3) {
+                return true;
+            }
+        }
         return false;
+    }
+
+    private static int getCharCount(String s, char c) {
+        int nr = 0;
+        for (char ch : s.toCharArray()) {
+            if (ch == c) {
+                nr++;
+            }
+        }
+        return nr;
     }
 }
