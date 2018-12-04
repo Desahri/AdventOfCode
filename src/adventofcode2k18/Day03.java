@@ -33,17 +33,17 @@ public class Day03 {
                 String[] cornerA = corner.split(",");
                 String[] sizeA = size.split("x");
                 this.x = Integer.parseInt(cornerA[0]);
-                this.y = Integer.parseInt(cornerA[1].substring(0, cornerA[1].length()-1));
+                this.y = Integer.parseInt(cornerA[1].substring(0, cornerA[1].length() - 1));
 
                 this.length = Integer.parseInt(sizeA[0]);
                 this.height = Integer.parseInt(sizeA[1]);
             }
 
             boolean overlaps(FabricArea area) {
-                if(area.x > this.x+this.length-1 || area.y > this.y+this.height-1) {
+                if (area.x > this.x + this.length - 1 || area.y > this.y + this.height - 1) {
                     return false;
                 }
-                if(area.x + area.length-1 < this.x || area.y + area.height-1 < this.y) {
+                if (area.x + area.length - 1 < this.x || area.y + area.height - 1 < this.y) {
                     return false;
                 }
                 return true;
@@ -51,7 +51,7 @@ public class Day03 {
         }
         FabricArea[] areas = new FabricArea[in.size()];
         int i = 0;
-        for(String s :in) {
+        for (String s : in) {
             String[] split = s.split(" ");
             String id = split[0];
             String corner = split[2];
@@ -60,9 +60,9 @@ public class Day03 {
             i++;
         }
         area1:
-        for(FabricArea ar : areas) {
-            for(FabricArea ar2 : areas) {
-                if(ar != ar2 && ar.overlaps(ar2)) {
+        for (FabricArea ar : areas) {
+            for (FabricArea ar2 : areas) {
+                if (ar != ar2 && ar.overlaps(ar2)) {
                     continue area1;
                 }
             }
@@ -75,13 +75,13 @@ public class Day03 {
         String[] cornerA = corner.split(",");
         String[] sizeA = size.split("x");
         int x = Integer.parseInt(cornerA[0]);
-        int y = Integer.parseInt(cornerA[1].substring(0, cornerA[1].length()-1));
+        int y = Integer.parseInt(cornerA[1].substring(0, cornerA[1].length() - 1));
 
         int length = Integer.parseInt(sizeA[0]);
         int height = Integer.parseInt(sizeA[1]);
 
-        for(int i = x; i < x+length; i++) {
-            for(int j = y; j < y+height; j++) {
+        for (int i = x; i < x + length; i++) {
+            for (int j = y; j < y + height; j++) {
                 field[i][j]++;
             }
         }
@@ -89,9 +89,9 @@ public class Day03 {
 
     static int countOverlaps(int[][] field) {
         int r = 0;
-        for(int[] ia : field) {
-            for(int i : ia) {
-                if(i > 1) {
+        for (int[] ia : field) {
+            for (int i : ia) {
+                if (i > 1) {
                     r++;
                 }
             }

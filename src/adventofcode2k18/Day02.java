@@ -29,13 +29,13 @@ public class Day02 {
 
         //solution part 2
         for (String id1 : in) {
-            for(String id2 : in) {
+            for (String id2 : in) {
                 int index = oneDifferentIndex(id1, id2);
-                if(!id1.equals(id2) && index != -1) {
+                if (!id1.equals(id2) && index != -1) {
                     System.out.print("answer: ");
                     char[] ca = id1.toCharArray();
-                    for(int i = 0; i < id1.length(); i++) {
-                        if(i != index) {
+                    for (int i = 0; i < id1.length(); i++) {
+                        if (i != index) {
                             System.out.print(ca[i]);
                         }
                     }
@@ -51,10 +51,10 @@ public class Day02 {
         int difIndex = -1;
         char[] s1Arr = s1.toCharArray();
         char[] s2Arr = s2.toCharArray();
-        for(int i = 0; i < s1Arr.length; i++) {
-            if(difIndex == -1 && s1Arr[i] != s2Arr[i]) {
+        for (int i = 0; i < s1Arr.length; i++) {
+            if (difIndex == -1 && s1Arr[i] != s2Arr[i]) {
                 difIndex = i;
-            } else if(difIndex >= 0 && s1Arr[i] != s2Arr[i]) {
+            } else if (difIndex >= 0 && s1Arr[i] != s2Arr[i]) {
                 return -1;
             }
         }
