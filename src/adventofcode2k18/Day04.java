@@ -10,6 +10,8 @@ public class Day04 {
     public static void main(String[] args) throws IOException {
         // TODO Auto-generated method stub
         ArrayList<String> in = GetInput.get("04.txt");
+        //solution part 1
+        /*
         //create guard dates
         for (String data : in) {
             GuardDate.addDate(data);
@@ -63,6 +65,44 @@ public class Day04 {
         }
         System.out.println(index);
         System.out.println("answer: " + (index * Integer.parseInt(highestID.substring(1))));
+        */
+
+        //solution part 2
+        //create guard dates
+        for (String data : in) {
+            GuardDate.addDate(data);
+        }
+        GuardDate.fillStates();
+
+        //find minute with most sleeping
+        HashMap<String, int[]> totalSleeps = new HashMap<>(); //maps a guard to an array of sleeping amounts per minute
+        for (String idDate : GuardDate.dates.keySet()) {
+            GuardDate gd = GuardDate.dates.get(idDate);
+            String guardID = gd.idGuard;
+            int[] sleepDays = (totalSleeps.containsKey(guardID) ? totalSleeps.get(guardID) : new int[60]);
+            for (int i = 0; i < gd.states.length; i++) {
+                if (gd.states[i] == GuardDate.GuardState.ASLEEP) {
+                    sleepDays[i]++;
+                }
+            }
+            totalSleeps.put(guardID, sleepDays);
+        }
+        String bestGuard = " ";
+        int bestSleep = 0;
+        int bestMinute = 0;
+        for (String guard : totalSleeps.keySet()) {
+            int[] sleepDays = totalSleeps.get(guard);
+            for (int i = 0; i < sleepDays.length; i++) {
+                if (sleepDays[i] > bestSleep) {
+                    bestSleep = sleepDays[i];
+                    bestMinute = i;
+                    bestGuard = guard;
+                }
+            }
+        }
+        System.out.println(bestGuard);
+        System.out.println(bestMinute);
+        System.out.println("answer: " + (bestMinute * Integer.parseInt(bestGuard.substring(1))));
     }
 
     static class Date {
