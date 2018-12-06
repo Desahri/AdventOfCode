@@ -16,6 +16,7 @@ public class Day05 {
         */
 
         //solution part 2
+        //generate char array with the alphabet
         char[] ALL_SMALL = new char[26];
         ALL_SMALL[0] = 'a';
         for (int i = 1; i < 26; i++) {
@@ -35,6 +36,11 @@ public class Day05 {
         System.out.println("answer: " + smallest);
     }
 
+    /**
+     * let chemical react
+     * each adjacent pair of chars where char[i] is the same letter as char[i+1] but not capital (if char[i+1] is)
+     * (or the other way around), then they will be both removed
+     */
     static String react(String chem) {
         boolean hasChanged = false;
         char[] chemChars = chem.toCharArray();
@@ -52,6 +58,9 @@ public class Day05 {
         return chem;
     }
 
+    /**
+     * returns a new char[] similar to the input char[], but with char[i] and char[i+1] removed
+     */
     static char[] removeElements(char[] chem, int index) {
         char[] r = new char[chem.length - 2];
         int passedIndex = 0;
@@ -64,6 +73,12 @@ public class Day05 {
         return r;
     }
 
+    /**
+     * USED FOR PART 2
+     * <p>
+     * removes all chars c within the char[] chem (both the small and capital version)
+     * returns the new array
+     */
     static char[] removeAllChars(char[] chem, char c) {
         char small = Character.toLowerCase(c);
         char large = Character.toUpperCase(c);
@@ -79,6 +94,11 @@ public class Day05 {
         return r;
     }
 
+    /**
+     * USED FOR PART 2
+     * <p>
+     * counts the number of times a char c appears in the char[] chem (case sensitive)
+     */
     static int countChars(char[] chem, char c) {
         int count = 0;
         for (char x : chem) {

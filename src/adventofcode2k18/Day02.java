@@ -46,6 +46,56 @@ public class Day02 {
         }
     }
 
+    /**
+     * USED FOR PART 1
+     * <p>
+     * returns whether the strings has a character that appears exactly twice
+     */
+    static boolean hasExactlyTwo(String id) {
+        for (char c : id.toCharArray()) {
+            if (getCharCount(id, c) == 2) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * USED FOR PART 1
+     * <p>
+     * returns whether the strings has a character that appears exactly three times
+     */
+    static boolean hasExactlyThree(String id) {
+        for (char c : id.toCharArray()) {
+            if (getCharCount(id, c) == 3) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * USED FOR PART 1
+     * <p>
+     * returns how often a char c appears in string s
+     */
+    private static int getCharCount(String s, char c) {
+        int nr = 0;
+        for (char ch : s.toCharArray()) {
+            if (ch == c) {
+                nr++;
+            }
+        }
+        return nr;
+    }
+
+    /**
+     * USED FOR PART 2
+     * <p>
+     * returns the index of the character in the strings s1 and s2
+     * the character in s1 is different from s2
+     * returns -1 if there are 2 or more indices where the character is different
+     */
     static int oneDifferentIndex(String s1, String s2) {
         assert s1.length() == s2.length();
         int difIndex = -1;
@@ -59,39 +109,5 @@ public class Day02 {
             }
         }
         return difIndex;
-    }
-
-    /**
-     * returns whether the strings has a character that appears exactly twice
-     */
-    static boolean hasExactlyTwo(String id) {
-        for (char c : id.toCharArray()) {
-            if (getCharCount(id, c) == 2) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * returns whether the strings has a character that appears exactly three times
-     */
-    static boolean hasExactlyThree(String id) {
-        for (char c : id.toCharArray()) {
-            if (getCharCount(id, c) == 3) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private static int getCharCount(String s, char c) {
-        int nr = 0;
-        for (char ch : s.toCharArray()) {
-            if (ch == c) {
-                nr++;
-            }
-        }
-        return nr;
     }
 }

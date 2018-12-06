@@ -17,10 +17,16 @@ public class Day03 {
             String size = split[3];
             fillField(field, corner, size);
         }
-        System.out.println(countOverlaps(field));
+        System.out.println("answer: " + countOverlaps(field));
         */
 
         //solution part 2
+        /**
+         * USED FOR PART 2
+         *
+         * class representing an area used of the total fabric together with the unique id of the elf using it.
+         * it can compute if another fabric area overlaps the fabric area
+         */
         class FabricArea {
             String id;
             int x;
@@ -49,6 +55,7 @@ public class Day03 {
                 return true;
             }
         }
+
         FabricArea[] areas = new FabricArea[in.size()];
         int i = 0;
         for (String s : in) {
@@ -59,6 +66,7 @@ public class Day03 {
             areas[i] = new FabricArea(id, corner, size);
             i++;
         }
+
         area1:
         for (FabricArea ar : areas) {
             for (FabricArea ar2 : areas) {
@@ -66,11 +74,17 @@ public class Day03 {
                     continue area1;
                 }
             }
-            System.out.println(ar.id);
+            System.out.println("answer: " + ar.id);
             return;
         }
     }
 
+    /**
+     * USED FOR PART 1
+     * <p>
+     * adds +1 for each point in field (point being field[x][y]) if used for fabric
+     * fabric is represented with the upperleft corner (as string input) and the length and height (as string input)
+     */
     static void fillField(int[][] field, String corner, String size) {
         String[] cornerA = corner.split(",");
         String[] sizeA = size.split("x");
@@ -87,6 +101,11 @@ public class Day03 {
         }
     }
 
+    /**
+     * USED FOR PART 1
+     * <p>
+     * returns how many points in field have a value larger than 1
+     */
     static int countOverlaps(int[][] field) {
         int r = 0;
         for (int[] ia : field) {

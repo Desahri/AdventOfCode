@@ -8,7 +8,7 @@ public class Day01 {
 
     public static void main(String[] args) throws IOException {
         ArrayList<String> in = GetInput.get("01.txt");
-        // Answer part 1
+        //solution part 1
 		/*
 		int ans = 0;
 		for(String line : in) {
@@ -24,7 +24,8 @@ public class Day01 {
 		}
 		System.out.println("answer: " + ans);
 		*/
-        //answer part 2
+
+        //solution part 2
         int freq = 0;
         List<Integer> frequencies = new ArrayList<>();
         frequencies.add(freq);

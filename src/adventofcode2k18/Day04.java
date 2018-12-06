@@ -74,7 +74,7 @@ public class Day04 {
         }
         GuardDate.fillStates();
 
-        //find minute with most sleeping
+        //find best guard and matching highest minute with most sleeping
         HashMap<String, int[]> totalSleeps = new HashMap<>(); //maps a guard to an array of sleeping amounts per minute
         for (String idDate : GuardDate.dates.keySet()) {
             GuardDate gd = GuardDate.dates.get(idDate);
@@ -105,6 +105,10 @@ public class Day04 {
         System.out.println("answer: " + (bestMinute * Integer.parseInt(bestGuard.substring(1))));
     }
 
+    /**
+     * represents a date in the shape of month and day
+     * can change its own day to the next day (used for when a guard shift start before 00:00)
+     */
     static class Date {
         static ArrayList<Integer> SMALL_MONTHS = new ArrayList<>(Arrays.asList(2, 4, 6, 9, 11));
         int month;
@@ -143,6 +147,11 @@ public class Day04 {
         }
     }
 
+    /**
+     * represents a specific day. Contains the guard working that day and the state of the guard at each minute
+     * between 00:00 and 00:59
+     * contains a static hashmap that maps a date string (mmdd) to a guard date
+     */
     static class GuardDate {
         static HashMap<String, GuardDate> dates = new HashMap<>();
 
@@ -158,6 +167,12 @@ public class Day04 {
             }
         }
 
+        /**
+         * used to possibly create a new date
+         * if the day of the record string already exists as a guard date
+         * add a new guard state depending on the state represented in the string(minute + AWAKE or ASLEEP)
+         * or add the guard id if the record is a guard starts shift record
+         */
         static void addDate(String record) {
             Date date = new Date(Integer.parseInt(record.substring(6, 8)), Integer.parseInt(record.substring(9, 11)));
             if (!record.substring(12, 14).equals("00")) {
@@ -187,21 +202,28 @@ public class Day04 {
             dates.put(idDate, gd);
         }
 
+        /**
+         * for each guard date fills up the state
+         * the state per minute is the state of the previous minute if its state is unknown
+         */
         static void fillStates() {
             for (String dateID : dates.keySet()) {
                 GuardDate gd = dates.get(dateID);
                 GuardState[] states = gd.states;
-                GuardState currentState = GuardState.AWAKE;
                 for (int i = 0; i < states.length; i++) {
                     if (states[i] == GuardState.UNKNOWN) {
-                        states[i] = currentState;
+                        states[i] = states[i - 1];
                         continue;
                     }
-                    currentState = states[i];
                 }
             }
         }
 
+        /**
+         * USED FOR PART 1
+         * <p>
+         * return the number of minutes the guard has been sleeping
+         */
         int getSleepTime() {
             int total = 0;
             for (GuardState gs : states) {
@@ -212,6 +234,10 @@ public class Day04 {
             return total;
         }
 
+        /**
+         * the three states a guard can be.
+         * note that a guard state can never be unknown after fill states is called
+         */
         enum GuardState {
             UNKNOWN,
             AWAKE,
