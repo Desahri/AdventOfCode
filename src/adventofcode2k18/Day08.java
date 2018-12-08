@@ -8,6 +8,8 @@ public class Day08 {
     public static void main(String[] args) throws IOException {
         // TODO Auto-generated method stub
         ArrayList<String> in = GetInput.get("08.txt");
+        //solution part 1
+        /*
         Node.createNode(in.get(0));
 
         int ans = 0;
@@ -15,7 +17,11 @@ public class Day08 {
             ans += n.getMetadataSum();
         }
         System.out.print("answer: " + ans);
+        */
 
+        //solution part 2
+        Node root = (Node) Node.createNode(in.get(0))[1];
+        System.out.print(root.getValue());
     }
 
     static class Node {
@@ -53,6 +59,19 @@ public class Day08 {
             int r = 0;
             for (int x : metadata) {
                 r += x;
+            }
+            return r;
+        }
+
+        int getValue() {
+            if (childs.length == 0) {
+                return getMetadataSum();
+            }
+            int r = 0;
+            for (int i : metadata) {
+                if ((i - 1 < childs.length)) {
+                    r += childs[i - 1].getValue();
+                }
             }
             return r;
         }
