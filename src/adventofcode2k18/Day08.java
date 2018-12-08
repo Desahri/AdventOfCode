@@ -77,6 +77,7 @@ public class Day08 {
             return r;
         }
 
+        //puts all strings in the array in a single string, with spaces between it
         static String buildString(String[] sa, int index) {
             StringBuilder builder = new StringBuilder();
             for (int i = index; i < sa.length - 1; i++) {
