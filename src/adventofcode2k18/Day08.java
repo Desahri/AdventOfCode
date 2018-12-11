@@ -55,6 +55,17 @@ public class Day08 {
             return new Object[]{s, n};
         }
 
+        //puts all strings in the array in a single string, with spaces between it
+        static String buildString(String[] sa, int index) {
+            StringBuilder builder = new StringBuilder();
+            for (int i = index; i < sa.length - 1; i++) {
+                builder.append(sa[i]);
+                builder.append(" ");
+            }
+            builder.append(sa[sa.length - 1]);
+            return builder.toString();
+        }
+
         int getMetadataSum() {
             int r = 0;
             for (int x : metadata) {
@@ -75,17 +86,6 @@ public class Day08 {
                 }
             }
             return r;
-        }
-
-        //puts all strings in the array in a single string, with spaces between it
-        static String buildString(String[] sa, int index) {
-            StringBuilder builder = new StringBuilder();
-            for (int i = index; i < sa.length - 1; i++) {
-                builder.append(sa[i]);
-                builder.append(" ");
-            }
-            builder.append(sa[sa.length - 1]);
-            return builder.toString();
         }
     }
 }
