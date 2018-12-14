@@ -36,6 +36,8 @@ public class Day13 {
         List<Cart> carts;
         int time;
 
+        List<Cart> killedCarts = new ArrayList<>();
+
         private enum Track {
             VERTICAL,
             HORIZONTAL,
@@ -87,8 +89,25 @@ public class Day13 {
         }
 
         boolean moveCarts() {
-            System.out.println(time + ": moving carts...");
-            for (Cart c : carts) {
+            carts.sort((o1, o2) -> {
+                if (o1.y < o2.y) {
+                    return -1;
+                }
+                if (o1.y > o2.y) {
+                    return 1;
+                }
+                if (o1.x < o2.x) {
+                    return -1;
+                }
+                if (o1.x > o2.x) {
+                    return 1;
+                }
+                return 0;
+            });
+            for (Cart c : carts.subList(0, carts.size())) {
+                if (killedCarts.contains(c)) {
+                    continue;
+                }
                 switch (c.direction) {
                     case UP:
                         c.moveUp();
@@ -145,17 +164,30 @@ public class Day13 {
                         System.out.println("Error at time " + time);
                         break;
                 }
-                if (checkCollisions()) return true;
+                checkCollisions();
+                //if (checkCollisions()) return true; //USED FOR PART 1
+            }
+            //USED FOR PART 2
+            if (carts.size() - killedCarts.size() == 1) {
+                for (Cart cc : carts) {
+                    if (!killedCarts.contains(cc)) {
+                        System.out.println("answer: " + cc.x + "," + cc.y);
+                    }
+                }
+                return true;
             }
             time++;
             return false;
         }
 
         boolean checkCollisions() {
-            for (Cart c1 : carts) {
-                for (Cart c2 : carts) {
-                    if (c1 != c2 && c1.x == c2.x && c1.y == c2.y) {
-                        System.out.println("answer: " + c1.x + "," + c1.y + " at time " + time);
+            List<Cart> cartsClone = carts.subList(0, carts.size());
+            for (Cart c1 : cartsClone) {
+                for (Cart c2 : cartsClone) {
+                    if (c1 != c2 && c1.x == c2.x && c1.y == c2.y && !killedCarts.contains(c1) && !killedCarts.contains(c2)) {
+                        //System.out.println("answer: " + c1.x + "," + c1.y + " at time " + time); //USED FOR PART 1
+                        killedCarts.add(c1); //USED FOR PART 2
+                        killedCarts.add(c2); //USED FOR PART 2
                         return true;
                     }
                 }
